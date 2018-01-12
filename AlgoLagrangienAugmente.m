@@ -34,7 +34,6 @@ tolmin = [ epsk,1e-10];
 gamma = [ 0.5 ; 2 ];
 eta = [ 0.01 ; 0.7 ];
 [xk,krdc,flagrdc] = RegionDeConfianceMS(xk,La,gradLa,hessLa,tolmin,deltamax,delta0,gamma,eta);
-krdc
 
 
 %% Test convergence
