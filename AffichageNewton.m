@@ -1,6 +1,12 @@
-function AffichageNewton(f,x0,tol,gradf,hessf)
-
-[x,k,flag] = AlgoNewton(f,x0,tol,gradf,hessf);
+function AffichageNewton(x0,tol,gradf,hessf)
+%% AffichageNewton
+%Fonction qui appelle AlgoNewton avec les mêmes paramètres et affiche les
+%résultats
+%--------------------------------------------------------------------------
+%Voir AlgoNewton
+%--------------------------------------------------------------------------
+[x,k,flag] = AlgoNewton(x0,tol,gradf,hessf);
+disp("-------------------------------------------");
 disp("La solution est : ");
 x
 disp(['Le nombre d''itération :  ',int2str(k)]);
@@ -14,4 +20,5 @@ elseif flag == 3
 elseif flag == 4
     disp("L'algorithme stagne");
 end
+disp("-------------------------------------------");
 end

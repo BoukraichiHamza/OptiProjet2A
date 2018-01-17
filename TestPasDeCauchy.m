@@ -1,3 +1,4 @@
+%% Script de Test pour le pas de Cauchy
 g1 = [0;0];
 H1 = [ 7 0; 0 2];
 g2 = [ 0 ; 0 ];

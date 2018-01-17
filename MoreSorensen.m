@@ -1,6 +1,19 @@
 
 function [s,lambda,q]=MoreSorensen(gradf,hessf,delta)
+%% MoreSorensen
+% Fonction qui renvoie le pas par l'algo de MoreSorensen
+%--------------------------------------------------------------------------
+% Données :
+%  - gradf : gradient de la fonction
+%  - hessf : hessienne de la fonction (symétrique)
+%  - deltak : rayon de la Region de confiance
+% Sortie :  
+%  - s : pas de MoreSorensen
+%  - lambda : zero de la fonction norm(s)² - delta²
+%  - q : valeur de la quadratique au pas calculé
+%--------------------------------------------------------------------------
 
+%% Calcul de la décomposition spectrale et tri des valeurs propres
 [V,D] = eig(hessf);
 d = diag(D);
 [d,p] = sort(d,'ascend');
@@ -8,8 +21,8 @@ V = V(:,p);
 
 solution_trouvee = false;
 
+%% Recherche d'une solution intérieure
 if (d(1) >= 0)
-
     z = V'*gradf;
     if d(1) < eps*norm(hessf,'fro')
         if norm(D(1)'*g)< eps * norm(z)
@@ -30,7 +43,7 @@ if (d(1) >= 0)
     end
 end
 
-
+%% Recherche de solution sur la frontière
 if ~solution_trouvee
        %Sauvegarde de la valeur de lambda1
      lambda1 = d(1);
@@ -41,9 +54,9 @@ if ~solution_trouvee
         h_phi = @(lambda)phi(lambda, z, d, delta, false);
         h_dphi = @(lambda)derivephi(lambda, z, d, delta, false);
         
-        %Creation de lambda0 ( BackTracking - ForwardTracking)
+        %% Creation de lambda0 ( BackTracking - ForwardTracking)
        
-        % back-tracking de lambda_min
+        %% back-tracking de lambda_min
         depart = max(0, -lambda1);
         if (depart == -lambda1)
             h = 0.1;
@@ -56,7 +69,7 @@ if ~solution_trouvee
             end
         end
         
-        % forward-tracking de lambda_max
+        %% forward-tracking de lambda_max
         h = 10;
         arrivee = max(0, -lambda1) + h;
         
@@ -67,17 +80,13 @@ if ~solution_trouvee
         end
         
         lambda0 = [ depart; arrivee];
-         %Resolution de l'équation
-        
+         %% Resolution de l'équation
         lambda = NewtonNonLineaire(h_phi,h_dphi,lambda0,1e-10);
-        %Calcule de s
+        % Calcule de s
         s = V*(-z ./ (lambda + d));
         
-        
-       
-
-        
     else
+        %% Troncature des vecteurs
         V1 = V(:,1);
         V = V(:,2:end);
         d = d(2:end);
@@ -91,11 +100,11 @@ if ~solution_trouvee
         
         if h_phi(-lambda1) > 0
 
-             %Creation de lambda0 ( BackTracking - ForwardTracking)
-              %pas besoin de  back-tracking de lambda_min
+             %% Creation de lambda0 ( BackTracking - ForwardTracking)
+              %% pas besoin de  back-tracking de lambda_min
             depart = max(0, -lambda1);
         
-          % forward-tracking de lambda_max
+          %% forward-tracking de lambda_max
               h = 10;
           arrivee = max(0, -lambda1) + h;
         
@@ -108,12 +117,12 @@ if ~solution_trouvee
             lambda0 = [ depart; arrivee];
         
         
-          %Resolution de l'équation
+          %% Resolution de l'équation
         
             lambda = NewtonNonLineaire(h_phi,h_dphi,lambda0,1e-10);
             s = V*(-z ./ (lambda + d));
         else
-            %Cas difficile
+            %% Cas difficile
              lambda = -lambda1;
               alpha = sqrt(-h_phi(lambda));
               s = V*(-z ./ (lambda + d)) + alpha*V1;
@@ -121,6 +130,7 @@ if ~solution_trouvee
         end
     end
 end
+%% Calcul de la valeur de la quadratique au pas Calculé
 q = gradf'*s + (0.5)*s'*hessf*s;
 
 end

@@ -1,7 +1,17 @@
-function AffichageRdc(x0,f,gradf,hessf,tol,deltamax,delta0,gamma,eta)
-
-[x,k,flag] = RegionDeConfiance(x0,f,gradf,hessf,tol,deltamax,delta0,gamma,eta);
-disp("La solution est : ");
+function AffichageRdc(x0,f,gradf,hessf,tol,deltamax,delta0,gamma,eta,choixPas)
+%% AffichageRdc
+%Fonction qui appelle RegionDeConfiance avec les mêmes paramètres et affiche les
+%résultats
+%--------------------------------------------------------------------------
+%Voir RegionDeConfiance
+%--------------------------------------------------------------------------
+[x,k,flag] = RegionDeConfiance(x0,f,gradf,hessf,tol,deltamax,delta0,gamma,eta,choixPas);
+disp("---------------------------------------------");
+if (choixPas == 0)
+    disp("La solution par pas de Cauchy est : ");
+else
+    disp("La solution par MoreSorensen est : ");
+end
 x
 disp(['Le nombre d''itération :  ',int2str(k)]);
 disp("condition d'arrêt :");
@@ -14,4 +24,5 @@ elseif flag == 3
 elseif flag == 4
     disp("L'algorithme stagne");
 end
+disp("---------------------------------------------");
 end

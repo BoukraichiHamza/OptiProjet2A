@@ -1,3 +1,4 @@
+%% Script de test pour l'algorithme de RegionDeConfiance avec Pas de Cauchy et MoreSorensen
 x011 = [1;0;0];
 x012 = [10;3;-2.2];
 x021 = [-1.2 ; 1];
@@ -13,17 +14,17 @@ delta023 = 2*norm(gradf2(x023));
 gamma = [ 0.5 ; 2 ];
 eta = [ 0.01 ; 0.2 ];
 
-AffichageRdC(x011,@f1,@gradf1,@hessf1,tol,deltamax,delta011,gamma,eta);
-AffichageRdcMS(x011,@f1,@gradf1,@hessf1,tol,deltamax,delta011,gamma,eta);
+AffichageRdC(x011,@f1,@gradf1,@hessf1,tol,deltamax,delta011,gamma,eta,0);
+AffichageRdC(x011,@f1,@gradf1,@hessf1,tol,deltamax,delta011,gamma,eta,1);
 
-AffichageRdC(x012,@f1,@gradf1,@hessf1,tol,deltamax,delta012,gamma,eta);
-AffichageRdcMS(x012,@f1,@gradf1,@hessf1,tol,deltamax,delta012,gamma,eta);
+AffichageRdC(x012,@f1,@gradf1,@hessf1,tol,deltamax,delta012,gamma,eta,0);
+AffichageRdC(x012,@f1,@gradf1,@hessf1,tol,deltamax,delta012,gamma,eta,1);
 
-AffichageRdC(x021,@f2,@gradf2,@hessf2,tol,deltamax,delta021,gamma,eta);
-AffichageRdcMS(x021,@f2,@gradf2,@hessf2,tol,deltamax,delta021,gamma,eta);
+AffichageRdC(x021,@f2,@gradf2,@hessf2,tol,deltamax,delta021,gamma,eta,0);
+AffichageRdC(x021,@f2,@gradf2,@hessf2,tol,deltamax,delta021,gamma,eta,1);
 
-AffichageRdC(x022,@f2,@gradf2,@hessf2,tol,deltamax,delta022,gamma,eta);
-AffichageRdcMS(x022,@f2,@gradf2,@hessf2,tol,deltamax,delta022,gamma,eta);
+AffichageRdC(x022,@f2,@gradf2,@hessf2,tol,deltamax,delta022,gamma,eta,0);
+AffichageRdC(x022,@f2,@gradf2,@hessf2,tol,deltamax,delta022,gamma,eta,1);
 
-AffichageRdC(x023,@f2,@gradf2,@hessf2,tol,deltamax,delta023,gamma,eta);
-AffichageRdcMS(x023,@f2,@gradf2,@hessf2,tol,deltamax,delta023,gamma,eta);
+AffichageRdC(x023,@f2,@gradf2,@hessf2,tol,deltamax,delta023,gamma,eta,0);
+AffichageRdC(x023,@f2,@gradf2,@hessf2,tol,deltamax,delta023,gamma,eta,1);

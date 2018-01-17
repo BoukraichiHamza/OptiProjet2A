@@ -1,11 +1,13 @@
 function y=phi(lambda, z, d, delta, inv)
+%% phi 
+% Fonction qui calcule l'image de lambda par la fonction phi
 %--------------------------------------------------------------------------
 % Données :
-%   - lambda, réel
-%   - z, vecteur de taille n, les numérateurs
-%   - d, vecteur de taille n, les dénominateurs
-%   - delta, réel
-%   - inv, booléen, vaut true si on veut l'expression inverse de phi
+%   - lambda : réel
+%   - z : vecteur des numérateurs
+%   - d : vecteur des denominateurs
+%   - delta : réel 
+%   - inv : booléen, vaut true si on veut l'expression inverse de phi
 %
 % Sortie :  
 %   - y, image de lambda par phi, point de R^1
